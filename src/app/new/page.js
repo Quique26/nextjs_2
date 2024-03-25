@@ -8,7 +8,7 @@ function Page({params}) {
     title: "",
     description: ""
   });
-  const {tasks, createTask} = useTasks()
+  const {tasks, createTask, updateTask} = useTasks()
   const router = useRouter()
 
   const handleChange = (e) => 
@@ -17,7 +17,7 @@ function Page({params}) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (params.id){
-      console.log("Editing")
+      updateTask(params.id, task)
     } else {
       createTask(task.title, task.description)
     }
@@ -27,14 +27,18 @@ function Page({params}) {
   useEffect(() => {
     if (params.id) {
       const taskFound = tasks.find((task) => task.id === params.id);
-      if (taskFound) setTask(taskFound.title, taskFound.description);
+      if (taskFound) 
+        setTask({
+          title: taskFound.title, 
+          description: taskFound.description
+        });
     }
-  })
+  }, [])
 
   return (
    <form onSubmit={handleSubmit}>
-      <input name= "title" placeholder="Write a title" onChange={handleChange} value={task.title}/>
-      <textarea name="description" placeholder="Write a description" onChange={handleChange} value={task.description}/>
+      <input name= "title" placeholder="Write a title" onChange={handleChange} value={task.title} />
+      <textarea name="description" placeholder="Write a description" onChange={handleChange} value={task.description} />
       <button>Save</button>
    </form>
   )
