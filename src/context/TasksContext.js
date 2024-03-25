@@ -11,23 +11,7 @@ export const useTasks = () => {
 }
 
 export const TaskProvider = ({children}) => {
-    const [tasks, setTasks] = useState([
-        {
-            id: 1,
-            title: " My first task",
-            description: "Some task"            
-        },
-        {
-            id: 2,
-            title: " My second task",
-            description: "Some second task"            
-        },
-        {
-            id: 3,
-            title: " My third task",
-            description: "Some third task"            
-        },
-    ]);    
+    const [tasks, setTasks] = useState([]);    
     
     const createTask = (title, description) =>
         setTasks([

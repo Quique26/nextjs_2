@@ -1,7 +1,3 @@
-function Page({params}) {
-    return (
-      <div>Editando {params.id}</div>
-    )
-  }
-  
-  export default Page
+import NewFormPage from "../../new/page"
+
+export default NewFormPage
