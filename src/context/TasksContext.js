@@ -38,5 +38,8 @@ export const TaskProvider = ({children}) => {
             },
         ]);
 
-    return <TaskContext.Provider value={{tasks, createTask}}>{children}</TaskContext.Provider>
+    const deleteTask = (id) =>
+        setTasks([...tasks.filter((task) => task.id !== id)])
+
+    return <TaskContext.Provider value={{tasks, createTask, deleteTask}}>{children}</TaskContext.Provider>
 }
