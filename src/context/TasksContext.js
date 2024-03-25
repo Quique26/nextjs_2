@@ -1,17 +1,18 @@
 "use client"
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext } from "react";
 import { v4 as uuid } from "uuid";
+import { useLocalStorage } from "@/hooks/useLocalstorage";
 
 export const TaskContext = createContext();
 
 export const useTasks = () => {
     const context = useContext(TaskContext)
     if(!context) throw new Error("useTasks must used within a provider")
-    return context
+    return context;
 }
 
-export const TaskProvider = ({children}) => {
-    const [tasks, setTasks] = useState([]);    
+export const TaskProvider = ({ children }) => {
+    const [tasks, setTasks] = useLocalStorage('tasks', [])
     
     const createTask = (title, description) =>
         setTasks([
